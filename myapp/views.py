@@ -14,7 +14,7 @@ def room_to_dict(data):
 
 def guess_to_dict(data):
   
-  return {"id":data.id,"room_id":data.room_id,"info":data.info,"eat":data.eat,"bite":data.bite,"created_at":data.created_at}
+  return {"id":data.id,"room_id":data.room_id.id,"info":data.info,"eat":data.eat,"bite":data.bite}
 
 
 def getRooms(request):
@@ -38,7 +38,7 @@ def getGuess(request):
   dbData = {
     "guess":[],
   }
-  objs = Guess.objects.filter().all()
+  objs = Guess.objects.filter(room_id=request.GET['id']).all()
   for obj in objs:
     dbData["guess"].append(guess_to_dict(obj))
   return JsonResponse(dbData)
@@ -86,5 +86,12 @@ def setStart(request):
   return JsonResponse({"説明":"id,startが必要"})
     
 def createGuess(request):
-  Guess(room_id=request.GET['room_id'],info=request.GET['info'],eat=request.GET['eat'],bite=request.GET['bite']).save()
+  Guess(room_id=Room.objects.get(id=request.GET['room_id']),info=request.GET['info'],eat=request.GET['eat'],bite=request.GET['bite']).save()
   return JsonResponse({"説明":"room_id,info,eat,biteが必要"})
+
+def deleteHistory(request):
+  if 'id' in request.GET:
+    objs = Guess.objects.filter(room_id=request.GET["id"]).all()
+    for obj in objs:
+      obj.delete()
+  return JsonResponse({"a":0})
