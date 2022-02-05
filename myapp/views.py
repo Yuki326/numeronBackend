@@ -31,6 +31,7 @@ def getRoom(request):
   dbData = {
     "room":room_to_dict(obj),
   }
+  return JsonResponse(dbData)
 
 def getGuess(request):
   
@@ -65,8 +66,8 @@ def joinRoom(request):
 def leftRoom(request):
   if 'id' in request.GET:
     obj = Room.objects.get(id=request.GET['id'])
-    if obj.num<=1:
-      obj.delete()
+    if obj.num==0:
+      return JsonResponse({"a":"0"})
     Room(id = obj.id,num = obj.num-1,code=obj.code,start=obj.start).save()
   return JsonResponse({"説明":"idが必要"})
 
