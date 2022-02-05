@@ -1,6 +1,4 @@
 from django.db import models
-from django.forms import IntegerField
-from django.db import models
 
 # Create your models here.
 
@@ -8,7 +6,6 @@ class Room(models.Model):
   code = models.CharField(max_length=4)
   num = models.IntegerField()
   start = models.DateTimeField(blank=True,null=True)
-  count = models.IntegerField()
 
 class Guess(models.Model):
   room_id = models.ForeignKey(Room,on_delete=models.CASCADE)

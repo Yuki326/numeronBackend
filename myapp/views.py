@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render
 from django.http.response import JsonResponse
 from django.http.response import HttpResponse
@@ -71,11 +72,54 @@ def leftRoom(request):
     Room(id = obj.id,num = obj.num-1,code=obj.code,start=obj.start).save()
   return JsonResponse({"説明":"idが必要"})
 
+import random
+def generateCode():
+
+  Room(id=request.GET['id'],)
+  card = [0,1,2,3,4,5,6,7,8,9]
+  CARD_NUM = card.length()
+  for i in range(CARD_NUM):
+      a = random.randint(0,CARD_NUM-1)
+      b = random.randint(0,CARD_NUM-1)
+      tmp = card[a]
+      card[a] = card[b]
+      card[b] = tmp
+  code =""
+  KETA=4
+  for i in range(4):
+    code = code + str(card[i])
+
+  return code
+
+def checkCode(request):
+  ans = list(Room.objects.get(id=request.GET['id']).code)
+  ans = list("1234")
+  print(ans)
+  guess = list(request.GET['input'])
+  print(guess)
+
+  eat = bite = 0;
+  KETASUU =4;
+  for i in range (KETASUU):
+    if str(guess[i]) == ans[i]:
+      eat += 1
+  for i in range(KETASUU):
+      for j in range(KETASUU):
+          if ans[i] == str(guess[j]):
+              bite += 1
+              break
+  bite -= eat
+  dbData = {
+    'code':request.GET['input'],
+    'eat':eat,
+    'bite':bite,
+  }
+  return JsonResponse({"data":dbData})
+
 def setCode(request):
   if 'id' in request.GET:
     obj = Room.objects.get(id=request.GET['id'])
-    if 'code' in request.GET:
-      Room(id = obj.id,num = obj.num,code=request.GET['code'],start=obj.start).save()
+    Room(id = obj.id,num = obj.num,code=generateCode(),start=obj.start).save()
   return JsonResponse({"説明":"id,codeが必要"})
 
 def setStart(request):
@@ -95,3 +139,7 @@ def deleteHistory(request):
     for obj in objs:
       obj.delete()
   return JsonResponse({"a":0})
+
+def getCount(request):
+  objs = Guess.objects.filter(room_id=request.GET['id']).all(); 
+  return JsonResponse({"count":objs.count()})

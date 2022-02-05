@@ -29,5 +29,8 @@ urlpatterns = [
     path('setCode/', views.setCode,  name="setCode"),
     path('setStart/', views.setStart,  name="setStart"),
     path('createGuess/', views.createGuess,  name="createGuess"),
+    path('checkCode/', views.checkCode,  name="checkCode"),
+    path('getCount/', views.getCount,  name="getCount"),
 
+    path('deleteHistory/', views.deleteHistory,  name="deleteHistory"),
 ]
