@@ -17,7 +17,7 @@ def guess_to_dict(data):
   return {"id":data.id,"room_id":data.room_id,"info":data.info,"eat":data.eat,"bite":data.bite,"created_at":data.created_at}
 
 
-def getRoom(request):
+def getRooms(request):
   dbData = {
     "room":[],
   }
@@ -26,6 +26,11 @@ def getRoom(request):
     dbData["room"].append(room_to_dict(obj))
   return JsonResponse(dbData)
 
+def getRoom(request):
+  obj = Room.objects.get(id=request.GET["id"]);
+  dbData = {
+    "room":room_to_dict(obj),
+  }
 
 def getGuess(request):
   

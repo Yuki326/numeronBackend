@@ -20,6 +20,7 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index,  name="index"),
+    path('getRooms/',views.getRooms,name="getRooms"),
     path('getRoom/',views.getRoom,name="getRoom"),
     path('getGuess/',views.getGuess,name="getGuess"),
     path('createRoom/', views.createRoom,  name="createRoom"),
