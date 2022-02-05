@@ -19,6 +19,14 @@ from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', views.index,  name="index")
+    path('', views.index,  name="index"),
+    path('getRoom/',views.getRoom,name="getRoom"),
+    path('getGuess/',views.getGuess,name="getGuess"),
+    path('createRoom/', views.createRoom,  name="createRoom"),
+    path('joinRoom/', views.joinRoom,  name="joinRoom"),
+    path('leftRoom/', views.leftRoom,  name="leftRoom"),
+    path('setCode/', views.setCode,  name="setCode"),
+    path('setStart/', views.setStart,  name="setStart"),
+    path('createGuess/', views.createGuess,  name="createGuess"),
 
 ]
