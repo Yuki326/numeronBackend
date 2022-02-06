@@ -1,4 +1,6 @@
 
+django-cors-headers==3.10.0
+
 Django==3.1.14
 django-allauth==0.45.0
 
