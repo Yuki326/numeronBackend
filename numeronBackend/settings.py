@@ -28,7 +28,7 @@ SECRET_KEY =  env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOW_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"]
 
 
 
