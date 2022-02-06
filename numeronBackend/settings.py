@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
-import environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,14 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 
-env = environ.Env(DEBUG=(bool,False))
-env.read_env(os.path.join(BASE_DIR,'.env'))
+SECRET_KEY =  'pej^q2ql$$#bzg#crh6k_9(p=%p)&6x(kwh@nos&=!'
 
-SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = env('DEBUG')
+DEBUG = False
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
