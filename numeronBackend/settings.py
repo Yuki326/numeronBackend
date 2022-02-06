@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+import environ
 
-
+env=environ.Env()
+env.read_env('.env')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,12 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 
-SECRET_KEY =  'pej^q2ql$$#bzg#crh6k_9(p=%p)&6x(kwh@nos&=!'
+SECRET_KEY =  env('SECRET_KEY')
 
+DEBUG = env('DEBUG')
 
-DEBUG = False
+ALLOW_HOSTS = env.list('ALLOWED_HOSTS')
 
-ALLOWED_HOSTS = ['*']
 
 
 
@@ -94,27 +96,27 @@ WSGI_APPLICATION = 'numeronBackend.wsgi.application'
 #     }
 # }
 # postgres://sunoco262:{your_password}@numeron-db2.postgres.database.azure.com/postgres?sslmode=require
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ['DBNAME'],
-#         'HOST': os.environ['DBHOST'],
-#         'USER': os.environ['DBUSER'],
-#         'PASSWORD': os.environ['DBPASS']
-#     }
-# }
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'guest',
-        'USER': 'sunoco262@numeron-db3',
-        'PASSWORD': 'f4P3ViE_',
-        'HOST': 'numeron-db3.postgres.database.azure.com',
-        # 'PORT': '3306',
+        'NAME': os.environ['DBNAME'],
+        'HOST': os.environ['DBHOST'],
+        'USER': os.environ['DBUSER'],
+        'PASSWORD': os.environ['DBPASS']
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'guest',
+#         'USER': 'sunoco262@numeron-db3',
+#         'PASSWORD': 'f4P3ViE_',
+#         'HOST': 'numeron-db3.postgres.database.azure.com',
+#         # 'PORT': '3306',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
