@@ -89,22 +89,34 @@ WSGI_APPLICATION = 'numeronBackend.wsgi.application'
 #     'default':env.db(),
 # }
 # """
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': '',
-#         'USER': 'root',
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.'),
 #     }
 # }
+# postgres://sunoco262:{your_password}@numeron-db2.postgres.database.azure.com/postgres?sslmode=require
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ['DBNAME'],
+#         'HOST': os.environ['DBHOST'],
+#         'USER': os.environ['DBUSER'],
+#         'PASSWORD': os.environ['DBPASS']
+#     }
+# }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'guest',
+        'USER': 'sunoco262@numeron-db3',
+        'PASSWORD': 'f4P3ViE_',
+        'HOST': 'numeron-db3.postgres.database.azure.com',
+        # 'PORT': '3306',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
