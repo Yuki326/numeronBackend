@@ -97,7 +97,6 @@ def setCode(request):
   return JsonResponse({"":0})
 def checkCode(request):
   ans = list(Room.objects.get(id=request.GET['id']).code)
-  ans = list("1234")
   print(ans)
   guess = list(request.GET['input'])
   print(guess)
