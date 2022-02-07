@@ -75,9 +75,8 @@ def leftRoom(request):
 import random
 def generateCode():
 
-  Room(id=request.GET['id'],)
   card = [0,1,2,3,4,5,6,7,8,9]
-  CARD_NUM = card.length()
+  CARD_NUM = 10 #todo
   for i in range(CARD_NUM):
       a = random.randint(0,CARD_NUM-1)
       b = random.randint(0,CARD_NUM-1)
@@ -91,6 +90,11 @@ def generateCode():
 
   return code
 
+def setCode(request):
+  if 'id' in request.GET:
+    obj = Room.objects.get(id=request.GET['id'])
+    Room(id = obj.id,num = obj.num,code=generateCode(),start=obj.start).save()
+  return JsonResponse({"":0})
 def checkCode(request):
   ans = list(Room.objects.get(id=request.GET['id']).code)
   ans = list("1234")
@@ -116,11 +120,7 @@ def checkCode(request):
   }
   return JsonResponse({"data":dbData})
 
-def setCode(request):
-  if 'id' in request.GET:
-    obj = Room.objects.get(id=request.GET['id'])
-    Room(id = obj.id,num = obj.num,code=generateCode(),start=obj.start).save()
-  return JsonResponse({"説明":"id,codeが必要"})
+
 
 def setStart(request):
   if 'id' in request.GET:
