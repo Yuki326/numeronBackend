@@ -58,6 +58,7 @@ MIDDLEWARE = [
 ]
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000', # ここに追加
+    'https://icy-ocean-0c3812300.1.azurestaticapps.net'
 ]
 CORS_ALLOW_CREDENTIALS = True
 
